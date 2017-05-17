@@ -1,4 +1,4 @@
-This is a post about finite vs infinite collections. At a presentation about Haskell, recently, I was surprised to learn that Haskell's list type is possibly-infinite. Of course, with a few moments' consideration, this can be seen as the obvious corollary of lazy evaluation: if the tail is lazy, the list may be infinite. The same is true of scala's `Stream` type and Java's also (`java.util.stream.Stream` introduced in Java 8).
+This is a post about finite vs infinite collections. At a presentation about Haskell, recently, I was surprised to learn that Haskell's list type is possibly-infinite. Of course, with a few moments' consideration, this can be seen as the obvious corollary of lazy evaluation: if the tail is lazy, the list may be infinite. The same is true of scala's `Stream` type (and also Java's `java.util.stream.Stream` introduced in Java 8)
 
 I've been working a lot with Java's streams lately and I think many of that library's key design decisions are superb. Let's clarify them:
 
