@@ -5,7 +5,7 @@ I've been working a lot with Java's streams lately and I think many of that libr
 A stream is a sequence of transformative operations on input data, on which a *single* terminal operation can be made to reduce the stream to some calculation. The terminal operation may not need to traverse the whole stream (`findAny`, `allMatch` etc). The input data may be finite of known length, finite of unknown length or infinite. What are terminal operations?
  - `collect`
  - `allMatch`, `anyMatch`
- - `findAny`, `findfirst`
+ - `findAny`, `findFirst`
  - `count`
  - `reduce`
  - `forEach`
