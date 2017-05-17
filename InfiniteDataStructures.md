@@ -14,7 +14,7 @@ What are the non-terminal transformations? `map`, `flatMap`, `filter`, `peek` et
 
 **Aside**: stream exposes a `sorted` operation which is non-terminal. In my opinion this is a mistake. Any operation which can only be performed in general by reading the entire stream into memory should be terminal and should expose the stream as a sorted "bag" (i.e. a `SortedSet` where repetitions are allowed) or at the least a sorted `java.util.List` or `Array`. I digress.
 
-**Another aside**: it's also my opinion that the stream library could have more effectively signaled the terminal and non-terminal operations differ fundamentally by insisting that the latter are all implemented via a collect. For example;
+**Another aside**: it's also my opinion that the stream library could have more effectively signaled the terminal and non-terminal operations differ fundamentally by insisting that the latter are all implemented via an *overload* of `collect`. For example;
 
  - `collect(Collector)`
  - `collect(ShortCircuitingCollector)`
