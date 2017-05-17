@@ -21,7 +21,7 @@ What are the non-terminal transformations? `map`, `flatMap`, `filter`, `peek` et
 
 I'm still digressing, sorry.
 
-But the type enthusiast in me thinks this is crazy. If I have a Stream of data which is infinite, should I even be *allowed* to perform a `count`, or even a `findAny` (what useful program might not terminate on such a line?). I'm led to think a little more about which terminal operations are legitimate on an infinite stream? The answer? Only one of them; `forEach`.
+But the type enthusiast in me thinks this is crazy. If I have a Stream of data which is infinite, should I even be *allowed* to perform a `count`, or even a `findAny` (what useful program might not terminate on such a line)? I'm led to think a little more about which terminal operations are legitimate on an infinite stream? The answer? Only one of them; `forEach`.
 
 Conclusion; to write a library which reuses code but has concrete classes `InfiniteStream` and `FiniteStream` which share the transformative operations on some common base type but which expose only those terminal operations that make sense for themselves. But is it even possible to do this? How to reuse or modify `Spliterator` (atop which Java's streams are concstructed; basically a potentially parallelizable iterator) such that we can guarantee that a finite stream is indeed finite? There is a big difference between finite in the sense of "of known size" (creating a `Stream` from a `java.util.List`) and finite in the sense of "unknown": for example, when making a SQL query. Consider what it means to be of unknown size - it means *your tail is lazily computed*.
 
