@@ -2,7 +2,7 @@ This is a post about finite vs infinite collections. At a presentation about Has
 
 I've been working a lot with Java's streams lately and I think many of that library's key design decisions are superb. Let's clarify them:
 
-A stream is a sequence of transformative operations on input data, on which a single terminal operation can be made to reduce the stream to some calculation. The terminal operation may not need to traverse the whole stream (findAny, allMatch etc). The input data may be finite of known length, finite of unknown length or infinite. What are terminal operations?
+A stream is a sequence of transformative operations on input data, on which a *single* terminal operation can be made to reduce the stream to some calculation. The terminal operation may not need to traverse the whole stream (`findAny`, `allMatch` etc). The input data may be finite of known length, finite of unknown length or infinite. What are terminal operations?
  - `collect`
  - `allMatch`, `anyMatch`
  - `findAny`, `findfirst`
@@ -12,9 +12,9 @@ A stream is a sequence of transformative operations on input data, on which a si
 
 What are the non-terminal transformations? `map`, `flatMap`, `filter`, `peek` etc
 
-*Aside*: stream exposes a `sorted` operation which is non-terminal. In my opinion this is a mistake. Any operation which can only be performed in general by reading the entire stream into memory should be terminal and should expose the stream as a sorted "bag" (i.e. a `SortedSet` where repetitions are allowed) or at the least a sorted `List` or `Array`. I digress.
+**Aside**: stream exposes a `sorted` operation which is non-terminal. In my opinion this is a mistake. Any operation which can only be performed in general by reading the entire stream into memory should be terminal and should expose the stream as a sorted "bag" (i.e. a `SortedSet` where repetitions are allowed) or at the least a sorted `List` or `Array`. I digress.
 
-*Another aside*: it's also my opinion that the stream library could have more effectively signaled the terminal and non-terminal operations differ fundamentally by insisting that the latter are all implemented via a collect. For example;
+**Another aside**: it's also my opinion that the stream library could have more effectively signaled the terminal and non-terminal operations differ fundamentally by insisting that the latter are all implemented via a collect. For example;
 
  - `collect(Collector)`
  - `collect(ShortCircuitingCollector)`
@@ -25,4 +25,4 @@ But the type enthusiast in me thinks this is crazy. If I have a Stream of data w
 
 Conclusion; to write a library which reuses code but has concrete classes `InfiniteStream` and `FiniteStream`. But: how to reuse or modify `Spliterator` (basically a potentially parallelizable iterator) such that we can guarantee that a finite stream is indeed finite? There is a big difference between finite in the sense of "size known" (creating a `Stream` from a `List`) and finite in the sense of "unknown". For example, when making a SQL query.
 
-But now we come full circle. If our tail is lazily computed, our data type is potentially infinite. There is no way to square this one.
+But now we come full circle. If our tail is lazily computed, our data type is potentially infinite. *There is no way to square this one*.
